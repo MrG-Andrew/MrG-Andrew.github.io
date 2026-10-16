@@ -1,6 +1,6 @@
 # Andrew Essam
 
-Static portfolio for [github.com/MrG-Andrew](https://github.com/MrG-Andrew). It lists selected work, live demos of public web projects, and the rest of the public repositories.
+Static portfolio for [github.com/MrG-Andrew](https://github.com/MrG-Andrew). It shows selected work, Expenses Tracker, My Pharmacy, and a link to the contact page.
 
 Hosted at [mrg-andrew.github.io](https://mrg-andrew.github.io).
 

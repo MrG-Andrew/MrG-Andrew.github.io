@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SidlabMock } from "./components/SidlabMock";
-import { archive, demos, featured } from "./data/projects";
+import { contactPage, demos, featured, linkedIn } from "./data/projects";
 
 type ThemeName = "light" | "dark";
 
@@ -38,7 +38,6 @@ export default function App() {
           <nav aria-label="Sections">
             <a href="#work">Work</a>
             <a href="#demos">Demos</a>
-            <a href="#archive">Archive</a>
             <a href="#contact">Contact</a>
           </nav>
           <button type="button" className="theme" onClick={toggleTheme} aria-pressed={theme === "dark"}>
@@ -51,8 +50,8 @@ export default function App() {
             <p className="kicker">Senior software developer</p>
             <h1>React interfaces for engineering desktop software.</h1>
             <p className="lede">
-              Since 2021 I have built the frontend of SIDLAB, a Windows application for duct acoustics and flow.
-              Alongside that I ship independent mobile tools and the public site at sidlab.se.
+              I build the frontend of SIDLAB, a Windows application for duct acoustics and flow. Alongside that I
+              ship independent mobile tools and the public site at sidlab.se.
             </p>
           </div>
           <dl className="spec">
@@ -83,10 +82,6 @@ export default function App() {
 
           <article className="feature" id={sidlab.id}>
             <div className="feature-copy">
-              <p className="index">
-                {sidlab.index}
-                <span>{sidlab.years}</span>
-              </p>
               <h3>{sidlab.name}</h3>
               <p>{sidlab.summary}</p>
               <ul>
@@ -108,10 +103,6 @@ export default function App() {
           <div className="rows">
             {rest.map((project) => (
               <article className="row" id={project.id} key={project.id}>
-                <p className="index">
-                  {project.index}
-                  <span>{project.years}</span>
-                </p>
                 <div>
                   <h3>{project.name}</h3>
                   <p>{project.summary}</p>
@@ -130,65 +121,38 @@ export default function App() {
 
         <section className="demos" id="demos">
           <header className="section-head">
-            <h2>Live demos</h2>
-            <p>Public web projects that run on GitHub Pages without a server or an API key.</p>
+            <h2>Demos</h2>
+            <p>Independent apps. The source stays private.</p>
           </header>
-          <ul className="demo-list">
+          <div className="rows">
             {demos.map((demo) => (
-              <li key={demo.repo}>
+              <article className="row" id={demo.id} key={demo.id}>
                 <div>
-                  <a href={demo.live}>{demo.name}</a>
+                  <h3>{demo.name}</h3>
                   <p>{demo.summary}</p>
+                  <p className="stack">{demo.stack.join(" · ")}</p>
+                  <p className="status">{demo.status}</p>
                 </div>
-                <span className="meta">
-                  {demo.year}
-                  <span>{demo.stack}</span>
-                </span>
-                <a className="repo-link" href={demo.repo}>
-                  GitHub
-                </a>
-              </li>
+              </article>
             ))}
-          </ul>
-        </section>
-
-        <section className="archive" id="archive">
-          <header className="section-head">
-            <h2>Public archive</h2>
-            <p>
-              The other {archive.length} public repositories. Forks are marked. PHP, Java, and anything that needs a
-              key or a database stays linked here instead of hosted.
-            </p>
-          </header>
-          <details>
-            <summary>Show {archive.length} repositories</summary>
-            <ul className="archive-list">
-              {archive.map((repo) => (
-                <li key={repo.repo}>
-                  <a href={repo.repo}>{repo.name}</a>
-                  <span>
-                    {repo.year} · {repo.language}
-                    {repo.fork ? " · fork" : ""}
-                  </span>
-                  <p>{repo.summary}</p>
-                </li>
-              ))}
-            </ul>
-          </details>
+          </div>
         </section>
 
         <section className="contact" id="contact">
           <header className="section-head">
             <h2>Contact</h2>
+            <p>Send an email or open a LinkedIn message.</p>
           </header>
           <ul>
             <li>
-              <a href="mailto:andrewessam01@gmail.com">andrewessam01@gmail.com</a>
+              <a href={contactPage}>Send a message</a>
+            </li>
+            <li>
+              <a href={linkedIn}>LinkedIn</a>
             </li>
             <li>
               <a href="https://github.com/MrG-Andrew">github.com/MrG-Andrew</a>
             </li>
-            <li>Cairo, Egypt</li>
           </ul>
         </section>
 
