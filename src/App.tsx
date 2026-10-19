@@ -38,6 +38,7 @@ export default function App() {
   const rest = featured.slice(1);
   const expenses = demos.find((item) => item.id === "expenses");
   const pharmacy = demos.find((item) => item.id === "pharmacy");
+  const resumeHref = `${import.meta.env.BASE_URL}Andrew_Essam_Resume.pdf`;
 
   return (
     <>
@@ -57,6 +58,9 @@ export default function App() {
             <a href="#work">Work</a>
             <a href="#demos">Demos</a>
             <a href="#contact">Contact</a>
+            <a href={resumeHref} target="_blank" rel="noreferrer">
+              Resume
+            </a>
           </nav>
           <button type="button" className="theme" onClick={toggleTheme} aria-pressed={theme === "dark"}>
             {theme === "dark" ? "Light" : "Dark"}
@@ -72,6 +76,10 @@ export default function App() {
               application for duct acoustics and flow. I also ship independent mobile tools and the public site at
               sidlab.se.
             </p>
+            <p className="lede">
+              I am open to freelance work of any size: a new app, changes to an existing one, or bug fixes. Tell me what
+              you need and I will shape the work around it.
+            </p>
           </div>
           <dl className="spec">
             <div>
@@ -84,11 +92,15 @@ export default function App() {
             </div>
             <div>
               <dt>Stack</dt>
-              <dd>TypeScript, React, Flutter, Firebase</dd>
+              <dd>TypeScript, Java, React, Angular, Flutter</dd>
             </div>
             <div>
               <dt>Also</dt>
-              <dd>Vite, Expo, Electron, SQL</dd>
+              <dd>Spring Boot, Firebase, Vite, Expo, Electron, SQL</dd>
+            </div>
+            <div>
+              <dt>Available</dt>
+              <dd>Freelance: apps, changes, bug fixes</dd>
             </div>
           </dl>
         </section>
@@ -161,9 +173,17 @@ export default function App() {
         <section className="contact" id="contact">
           <header className="section-head">
             <h2>Contact</h2>
-            <p>Send an email or open a LinkedIn message.</p>
+            <p>
+              Open to freelance work of any size: a new app, changes to an existing one, or bug fixes. Tell me what you
+              need and I will shape the work around it.
+            </p>
           </header>
           <ul>
+            <li>
+              <a href={resumeHref} target="_blank" rel="noreferrer">
+                Resume (PDF)
+              </a>
+            </li>
             <li>
               <a href={contactPage}>Send a message</a>
             </li>
@@ -177,7 +197,7 @@ export default function App() {
         </section>
 
         <footer>
-          <p>Static site. Hosted free on GitHub Pages.</p>
+          <p>© Andrew Essam 2026</p>
         </footer>
       </div>
     </>
