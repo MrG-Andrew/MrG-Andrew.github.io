@@ -1,8 +1,24 @@
-import { useState } from "react";
-import { SidlabMock } from "./components/SidlabMock";
+import { useState, type ReactNode } from "react";
+import { ExpensesDemo } from "./components/ExpensesDemo";
+import { PharmacyDemo } from "./components/PharmacyDemo";
+import { SidlabMock, SidlabStills } from "./components/SidlabMock";
 import { contactPage, demos, featured, linkedIn } from "./data/projects";
 
 type ThemeName = "light" | "dark";
+
+function DemoArticle({ demo, children }: { demo: (typeof demos)[number]; children: ReactNode }) {
+  return (
+    <article className="feature" id={demo.id}>
+      <div className="feature-copy">
+        <h3>{demo.name}</h3>
+        <p>{demo.summary}</p>
+        <p className="stack">{demo.stack.join(" · ")}</p>
+        <p className="status">{demo.status}</p>
+      </div>
+      {children}
+    </article>
+  );
+}
 
 function currentTheme(): ThemeName {
   return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
@@ -20,6 +36,8 @@ export default function App() {
 
   const sidlab = featured[0];
   const rest = featured.slice(1);
+  const expenses = demos.find((item) => item.id === "expenses");
+  const pharmacy = demos.find((item) => item.id === "pharmacy");
 
   return (
     <>
@@ -47,29 +65,30 @@ export default function App() {
 
         <section className="hero" id="top">
           <div>
-            <p className="kicker">Senior software developer</p>
-            <h1>React interfaces for engineering desktop software.</h1>
+            <p className="kicker">Full-stack software developer</p>
+            <h1>Software across desktop, web, and mobile.</h1>
             <p className="lede">
-              I build the frontend of SIDLAB, a Windows application for duct acoustics and flow. Alongside that I
-              ship independent mobile tools and the public site at sidlab.se.
+              I design and ship complete products: interfaces, data, and the systems around them. SIDLAB is a Windows
+              application for duct acoustics and flow. I also ship independent mobile tools and the public site at
+              sidlab.se.
             </p>
           </div>
           <dl className="spec">
             <div>
               <dt>Focus</dt>
-              <dd>Diagrams, plots, instrument workflows, licensing</dd>
+              <dd>Desktop, web, and mobile products</dd>
             </div>
             <div>
               <dt>Production</dt>
-              <dd>Four SIDLAB releases, 1,000+ frontend commits</dd>
+              <dd>Four SIDLAB releases, 1,000+ commits</dd>
             </div>
             <div>
               <dt>Stack</dt>
-              <dd>React, TypeScript, Vite, Redux Toolkit</dd>
+              <dd>TypeScript, React, Flutter, Firebase</dd>
             </div>
             <div>
               <dt>Also</dt>
-              <dd>Expo, Flutter, Firebase, Electron</dd>
+              <dd>Vite, Expo, Electron, SQL</dd>
             </div>
           </dl>
         </section>
@@ -80,25 +99,28 @@ export default function App() {
             <p>Employer source, client files, and secrets stay off this site.</p>
           </header>
 
-          <article className="feature" id={sidlab.id}>
-            <div className="feature-copy">
-              <h3>{sidlab.name}</h3>
-              <p>{sidlab.summary}</p>
-              <ul>
-                {sidlab.details.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <p className="stack">{sidlab.stack.join(" · ")}</p>
-              <p className="status">{sidlab.status}</p>
-              {sidlab.href ? (
-                <a className="text-link" href={sidlab.href}>
-                  {sidlab.hrefLabel}
-                </a>
-              ) : null}
-            </div>
-            <SidlabMock />
-          </article>
+          <div className="sidlab-block">
+            <article className="feature" id={sidlab.id}>
+              <div className="feature-copy">
+                <h3>{sidlab.name}</h3>
+                <p>{sidlab.summary}</p>
+                <ul>
+                  {sidlab.details.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+                <p className="stack">{sidlab.stack.join(" · ")}</p>
+                <p className="status">{sidlab.status}</p>
+                {sidlab.href ? (
+                  <a className="text-link" href={sidlab.href}>
+                    {sidlab.hrefLabel}
+                  </a>
+                ) : null}
+              </div>
+              <SidlabMock />
+            </article>
+            <SidlabStills />
+          </div>
 
           <div className="rows">
             {rest.map((project) => (
@@ -122,20 +144,18 @@ export default function App() {
         <section className="demos" id="demos">
           <header className="section-head">
             <h2>Demos</h2>
-            <p>Independent apps. The source stays private.</p>
+            <p>Independent apps. Each one has a short sample and still frames.</p>
           </header>
-          <div className="rows">
-            {demos.map((demo) => (
-              <article className="row" id={demo.id} key={demo.id}>
-                <div>
-                  <h3>{demo.name}</h3>
-                  <p>{demo.summary}</p>
-                  <p className="stack">{demo.stack.join(" · ")}</p>
-                  <p className="status">{demo.status}</p>
-                </div>
-              </article>
-            ))}
-          </div>
+          {expenses ? (
+            <DemoArticle demo={expenses}>
+              <ExpensesDemo />
+            </DemoArticle>
+          ) : null}
+          {pharmacy ? (
+            <DemoArticle demo={pharmacy}>
+              <PharmacyDemo />
+            </DemoArticle>
+          ) : null}
         </section>
 
         <section className="contact" id="contact">
